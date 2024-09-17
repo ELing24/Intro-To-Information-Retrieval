@@ -1,0 +1,26 @@
+<form action="/" method = "POST">
+    <p><input type = "submit" value = "Search Again" /></p>
+</form>
+{% for item in lucene_output %}
+<h2> Title: {{item["title"]}} </h2>
+<h3> Link: <a href={{item["url"]}}>{{item["url"]}}</a> </h2> 
+<h3> Author: {{item['author']}}</h4>
+<h4> Date: {{item['time']}}</h4>
+<h4> Upvotes: {{item['upvotes']}}</h4>
+<h4> Number of Comments: {{item['numOfComments']}} </h4>
+<h4> Score: {{item['score']}}</h4>
+<h4>Body:</h4> 
+<p>{{item['context']}}</p>
+{% if item['externalTitles']|length != 0 %}
+<h2>External Link(s):</h2>
+{% endif %}
+{% for externalUrl in item['externalTitles'] %}
+<a href={{externalUrl["url"]}}>{{externalUrl["url"]}}</a>
+<br>
+{% endfor %}
+<h4> Comments: </h4>
+{% for comments in item['comments'] %}
+<hr>
+<p>{{comments}}</p>
+{% endfor %}
+{% endfor %}
